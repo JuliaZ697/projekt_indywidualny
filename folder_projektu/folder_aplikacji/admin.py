@@ -8,7 +8,7 @@ class PersonAdmin(admin.ModelAdmin):
     list_filter = ['team']
 
 # ten obiekt też trzeba zarejestrować w module admin
-admin.site.register(Pearson, PearsonAdmin)
+admin.site.register(Person, PersonAdmin)
 class StanowiskoAdmin(admin.ModelAdmin):
     list_display = ["nazwa", "opis"]
     list_filter = ["nazwa"]
