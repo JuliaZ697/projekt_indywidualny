@@ -1,0 +1,36 @@
+zad1
+```
+from folder_aplikacji.models import Osoba 
+osoby = Osoba.objects.all()
+print(osoby)
+```
+
+
+Zad2
+
+```python
+osoba = Osoba.objects.get(id=3)
+print(osoba)
+```
+
+zad3 
+```python
+osoba_z_A = Osoba.objects.filter(imie_startswith = 'A')
+print(osoba_z_A)
+```
+
+zad4
+```python
+stanowiska = Osoba.objects.values('stanowisko').distinct()
+print(stanowiska)
+```
+
+zad5
+```python
+from folder_aplikacji.models import Stanowisko
+Stanowisko.object.values_list('nazwa', flat = True).order_by("-nazwa)
+```
+zad6
+```python
+Osoba.objects.create(imie = 'Jan', nazwisko = 'Kowalski', plec = 2, stanowisko = Stanowisko.objects.get(id = 1))
+```
