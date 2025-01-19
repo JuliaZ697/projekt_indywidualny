@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Person, Team, MONTHS, SHIRT_SIZES, Stanowisko, Osoba
+from datetime import date
 
 
 class PersonSerializer(serializers.Serializer):
@@ -77,6 +78,20 @@ class TeamSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 class OsobaSerializer(serializers.ModelSerializer):
+    def validate_imie(self,value):
+        if not value.isalpha():
+            raise seralizers.ValidationError("Pole 'imie'musi zawierac tylko litery!!!")
+        return value
+
+    def validate_nazwisko(self, value):
+        if not value.isalpha():
+            raise seralizers.ValidationError("Pole 'nazwisko'musi zawierac tylko litery!!!")
+        return value
+    
+    def validate_data_dodania(self, value):
+        if value > date.today():
+            raise seralizers.ValidationError("Pole 'data dodania' nie moze byc z przyszlosci!!!")
+        return value
     class Meta:
         fields = [  'id', 'imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania']
-        read_only_fields = ['id', 'data_dodania']
+        read_only_fields = ['id']
