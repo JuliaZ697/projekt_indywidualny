@@ -1,5 +1,5 @@
 zad1
-```
+```python
 from folder_aplikacji.models import Osoba 
 osoby = Osoba.objects.all()
 print(osoby)
@@ -15,7 +15,7 @@ print(osoba)
 
 zad3 
 ```python
-osoba_z_A = Osoba.objects.filter(imie_startswith = 'A')
+osoba_z_A = Osoba.objects.filter(imie__startswith = 'A')
 print(osoba_z_A)
 ```
 
@@ -30,7 +30,8 @@ zad5
 from folder_aplikacji.models import Stanowisko
 Stanowisko.object.values_list('nazwa', flat = True).order_by("-nazwa)
 ```
+
 zad6
 ```python
-Osoba.objects.create(imie = 'Jan', nazwisko = 'Kowalski', plec = 2, stanowisko = Stanowisko.objects.get(id = 1))
+Osoba.objects.create(imie = 'Jan', nazwisko = 'Kowalski', plec=2, stanowisko=Stanowisko.objects.get(id = 1))
 ```
