@@ -15,7 +15,7 @@ class PersonSerializer(serializers.Serializer):
     # w pliku models.py SHIRT_SIZES oraz MONTHS zostały wyniesione jako stałe do poziomu zmiennych skryptu
     # (nie wewnątrz modelu)
     shirt_size = serializers.ChoiceField(choices=SHIRT_SIZES, default=SHIRT_SIZES[0][0])
-    miesiac_dodania = serializers.ChoiceField(choices=MONTHS.choices, default=MONTHS.choices[0][0])
+    month_added = serializers.ChoiceField(choices=MONTHS.choices, default=MONTHS.choices[0][0])
 
     # odzwierciedlenie pola w postaci klucza obcego
     # przy dodawaniu nowego obiektu możemy odwołać się do istniejącego poprzez inicjalizację nowego obiektu
@@ -40,7 +40,7 @@ class PersonSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.shirt_size = validated_data.get('shirt_size', instance.shirt_size)
-        instance.miesiac_dodania = validated_data.get('miesiac_dodania', instance.miesiac_dodania)
+        instance.month_added = validated_data.get('month_added', instance.month_added)
         instance.team = validated_data.get('team', instance.team)
         instance.pseudonim = validated.data.get('pseudonim', instance.pseudonim)
         instance.save()
@@ -57,11 +57,11 @@ class PersonSerializer(serializers.Serializer):
  #       read_only_fields = ['id']
 
 
-class StanowiskoSerializer(serializer.Serializer):
-    nazwa = serialiazers.CharField(max_length = 80)
-    opis = serialiazers.CharField()
+class StanowiskoSerializer(serializers.Serializer):
+    nazwa = serializers.CharField(max_length = 80)
+    opis = serializers.CharField()
 
-    def create(self, validated.data):
+    def create(self, validated_data):
         return Stanowisko.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
@@ -72,11 +72,11 @@ class StanowiskoSerializer(serializer.Serializer):
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
-    model = Team 
-    fields = ['id', 'name', 'country']
-    read_only_fields = ['id']
+        model = Team 
+        fields = ['id', 'name', 'country']
+        read_only_fields = ['id']
 
-class OsobaSerializer(serialiazers.ModelSerializer):
+class OsobaSerializer(serializers.ModelSerializer):
     class Meta:
-    fields = ['id', 'imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania']
-    read_only_fields = ['id', 'data_dodania']
+        fields = [  'id', 'imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania']
+        read_only_fields = ['id', 'data_dodania']
